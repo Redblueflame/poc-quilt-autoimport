@@ -1,0 +1,21 @@
+buildscript{
+    dependencies{
+        classpath files('../classvisitor/build/libs/classvisitor-all.jar')
+    }
+}
+
+apply plugin: 'java'
+//noinspection UnnecessaryQualifiedReference
+apply plugin: com.redblueflame.importer.ImporterPlugin
+
+group 'com.redblueflame.test'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+}
+
