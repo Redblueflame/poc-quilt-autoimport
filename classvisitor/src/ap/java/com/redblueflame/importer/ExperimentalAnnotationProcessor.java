@@ -6,6 +6,11 @@ import javax.lang.model.element.*;
 import javax.lang.model.type.ExecutableType;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
+import javax.tools.FileObject;
+import javax.tools.JavaFileManager;
+import javax.tools.StandardLocation;
+import java.io.IOException;
+import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,6 +30,7 @@ public class ExperimentalAnnotationProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        StringBuilder file = new StringBuilder();
         annotations.forEach(annotation -> {
             Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(annotation);
             for (Element elem : elements) {
@@ -42,7 +48,17 @@ public class ExperimentalAnnotationProcessor extends AbstractProcessor {
                 } else {
                     throw new RuntimeException("Cannot process unknown element kind " + elem.getKind());
                 }
+                file.append(packageName).append(":").append(feature).append(";\n");
                 System.err.println(packageName + " -> " + feature);
+            }
+            try {
+                FileObject ressource = processingEnvironment.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", ".experimental");
+                Writer writer = ressource.openWriter();
+                writer.write(file.toString());
+                writer.close();
+            } catch (IOException e) {
+                System.err.println("An error occurred while creating the ressource file.");
+                e.printStackTrace();
             }
         });
         return true;
