@@ -16,6 +16,5 @@ public class ImporterPlugin implements Plugin<Project> {
             t.dependsOn("jar");
             t.setGroup("quilt");
         });
-
     }
 }

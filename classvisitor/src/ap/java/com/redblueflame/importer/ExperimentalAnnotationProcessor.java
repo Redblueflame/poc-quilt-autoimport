@@ -48,7 +48,7 @@ public class ExperimentalAnnotationProcessor extends AbstractProcessor {
                 } else {
                     throw new RuntimeException("Cannot process unknown element kind " + elem.getKind());
                 }
-                file.append(packageName).append(":").append(feature).append(";\n");
+                file.append(packageName).append(":").append(feature).append("\n");
                 System.err.println(packageName + " -> " + feature);
             }
             try {
@@ -113,7 +113,7 @@ public class ExperimentalAnnotationProcessor extends AbstractProcessor {
         if (!(field instanceof VariableElement)) {
             throw new ClassCastException("Expected variable element");
         }
-        return getCanonicalClassName(field.getEnclosingElement()) + field.getSimpleName() + signature(field.asType().toString());
+        return getCanonicalClassName(field.getEnclosingElement()) + "." + field.getSimpleName() + ";" + signature(field.asType().toString());
     }
 
     /**
