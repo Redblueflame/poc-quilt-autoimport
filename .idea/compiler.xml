@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="DependencyImporter" target="16" />
+      <module name="TestingThings" target="16" />
+      <module name="TestingThings.main" target="16" />
+      <module name="TestingThings.test" target="16" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

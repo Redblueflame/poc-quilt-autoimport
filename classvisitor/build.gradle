@@ -30,5 +30,24 @@ task relocateShadowJar(type: ConfigureShadowRelocation) {
     target = tasks.shadowJar
 }
 
+sourceSets {
+    main
+
+    ap {
+        java {
+            compileClasspath += main.output
+        }
+        resources {
+            srcDirs += "src/ap/resources"
+        }
+    }
+}
+
+// generate shadow jar so we can use the AP standalone
+shadowJar  {
+    from sourceSets.ap.output
+    from sourceSets.ap.resources
+}
+
 tasks.shadowJar.dependsOn tasks.relocateShadowJar
 configurations.compile.dependencies.remove dependencies.gradleApi()

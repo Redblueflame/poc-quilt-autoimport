@@ -1,0 +1,30 @@
+buildscript{
+    dependencies{
+        classpath files('../classvisitor/build/libs/classvisitor-all.jar')
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    compile files('../classvisitor/build/libs/classvisitor-all.jar')
+    annotationProcessor files('../classvisitor/build/libs/classvisitor-all.jar')
+}
+
+test {
+    useJUnitPlatform()
+}
+compileJava {
+
+}
