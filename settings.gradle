@@ -1,0 +1,8 @@
+rootProject.name = 'experimental-poc'
+
+include 'classvisitor'
+include 'annotations'
+include 'testlibrary'
+include 'testproject'
+include 'kotlinproject'
+
