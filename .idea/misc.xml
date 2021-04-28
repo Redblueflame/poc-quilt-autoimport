@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/classvisitor" />
-    <file type="web" url="file://$PROJECT_DIR$/testlibrary" />
-    <file type="web" url="file://$PROJECT_DIR$/testproject" />
+    <file type="web" url="file://$PROJECT_DIR$" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="adopt-openjdk-14" project-jdk-type="JavaSDK" />
 </project>

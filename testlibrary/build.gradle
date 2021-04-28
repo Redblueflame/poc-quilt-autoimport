@@ -1,6 +1,6 @@
 buildscript{
     dependencies{
-        classpath files('../classvisitor/build/libs/classvisitor-all.jar')
+        classpath files("../classvisitor/build/libs/classvisitor-1.0-SNAPSHOT-all.jar")
     }
 }
 
@@ -12,14 +12,20 @@ group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
+    maven {
+        name = "Quilt"
+        url = "https://maven.quiltmc.org/repository/release"
+    }
     mavenCentral()
 }
+
+
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-    compile files('../classvisitor/build/libs/classvisitor-all.jar')
-    annotationProcessor files('../classvisitor/build/libs/classvisitor-all.jar')
+    compile project(':classvisitor')
+    annotationProcessor project(':classvisitor')
 }
 
 test {

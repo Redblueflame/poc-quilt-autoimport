@@ -6,8 +6,15 @@ import org.objectweb.asm.*;
 public class ImporterClassVisitor extends ClassVisitor {
     public ImporterMethodVisitor methodVisitor = new ImporterMethodVisitor();
     private String className = "none";
-    public ImporterClassVisitor(int api) {
-        super(api);
+
+    public ImporterClassVisitor() {
+        super(Opcodes.ASM4);
+    }
+
+    @Override
+    public void visitSource(String source, String debug) {
+        methodVisitor.setFile(source);
+        super.visitSource(source, debug);
     }
 
     @Override

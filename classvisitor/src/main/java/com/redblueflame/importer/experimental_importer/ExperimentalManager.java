@@ -1,9 +1,13 @@
 package com.redblueflame.importer.experimental_importer;
 
 import org.apache.commons.io.IOUtils;
+import org.quiltmc.json5.JsonReader;
 
 import javax.annotation.Nullable;
+import java.io.FileReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -17,18 +21,21 @@ public class ExperimentalManager {
 
     public void import_file(JarFile jar) {
         try {
-            JarEntry experimentalFile = jar.getJarEntry(".experimental");
+            JarEntry experimentalFile = jar.getJarEntry(".experimental.json");
             if (experimentalFile == null) {
                 // This dependency does not contain an experimental file
                 return;
             }
             // Import the experimental file
             InputStream stream = jar.getInputStream(experimentalFile);
-            List<String> lines = Arrays.asList(new String(stream.readAllBytes(), StandardCharsets.UTF_8).split("\n"));
-            lines.forEach(line -> {
-                String[] splitted = line.split(":");
-                experimental_values.put(splitted[0], splitted[1]);
-            });
+            Reader reader = new InputStreamReader(stream);
+            JsonReader json = JsonReader.createStrict(reader);
+            json.beginObject();
+            while (json.hasNext()) {
+                String name = json.nextName();
+                String feature = json.nextString();
+                experimental_values.put(name, feature);
+            }
         } catch (Exception e) {
             System.err.println("An error occurred while loading the dependencies");
         }
